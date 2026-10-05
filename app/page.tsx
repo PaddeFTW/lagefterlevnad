@@ -1,53 +1,10 @@
-import { Blocks, FileStack, Home, LayoutPanelTop, Settings2 } from "lucide-react";
+import { ClipboardCheck, Home, Settings2 } from "lucide-react";
+import Link from "next/link";
 
-import { FoundationShowcase } from "@/components/common/foundation-showcase";
+import { EmptyState } from "@/components/common/empty-state";
 import { DashboardLayout } from "@/components/layout/dashboard-layout";
 import { Button } from "@/components/ui/button";
-import { siteConfig } from "@/lib/site-config";
 
-const navigation = [
-  {
-    title: "Foundation overview",
-    href: "/",
-    icon: <Home className="size-4" />,
-  },
-  {
-    title: "UI primitives",
-    href: "/",
-    icon: <Blocks className="size-4" />,
-    badge: "Core",
-  },
-  {
-    title: "Layout shells",
-    href: "/",
-    icon: <LayoutPanelTop className="size-4" />,
-  },
-  {
-    title: "Document patterns",
-    href: "/",
-    icon: <FileStack className="size-4" />,
-  },
-  {
-    title: "Settings patterns",
-    href: "/",
-    icon: <Settings2 className="size-4" />,
-  },
-];
+const navigation = [{ title: "Översikt", href: "/", icon: <Home className="size-4" /> }, { title: "Kontroller", href: "/kontroller", icon: <ClipboardCheck className="size-4" /> }, { title: "Inställningar", href: "/", icon: <Settings2 className="size-4" /> }];
 
-export default function HomePage() {
-  return (
-    <DashboardLayout
-      actions={
-        <>
-          <Button variant="secondary">Review docs</Button>
-          <Button>Extend foundation</Button>
-        </>
-      }
-      description={siteConfig.description}
-      navigation={navigation}
-      title="app"
-    >
-      <FoundationShowcase />
-    </DashboardLayout>
-  );
-}
+export default function HomePage() { return <DashboardLayout navigation={navigation} title="Översikt" description="En samlad vy över lagefterlevnad i appen." actions={<Button asChild><Link href="/kontroller/ny">Ny kontroll</Link></Button>}><EmptyState title="Inga kontroller ännu" description="Skapa din första kontroll för att börja samla grunduppgifter och scope." actionLabel="Skapa första kontrollen" actionHref="/kontroller/ny" /></DashboardLayout>; }

@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { FileSearch } from "lucide-react";
 
 import { cn } from "@/lib/utils";
@@ -7,6 +8,7 @@ interface EmptyStateProps {
   title: string;
   description: string;
   actionLabel?: string;
+  actionHref?: string;
   className?: string;
 }
 
@@ -14,6 +16,7 @@ export function EmptyState({
   title,
   description,
   actionLabel,
+  actionHref,
   className,
 }: EmptyStateProps) {
   return (
@@ -31,8 +34,8 @@ export function EmptyState({
         <p className="max-w-md text-sm leading-6 text-muted-foreground">{description}</p>
       </div>
       {actionLabel ? (
-        <Button className="mt-6" variant="secondary">
-          {actionLabel}
+        <Button className="mt-6" variant="secondary" asChild={Boolean(actionHref)}>
+          {actionHref ? <Link href={actionHref}>{actionLabel}</Link> : actionLabel}
         </Button>
       ) : null}
     </div>
